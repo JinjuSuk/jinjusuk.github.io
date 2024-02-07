@@ -1,0 +1,26 @@
+---
+title: "About" 
+format: html 
+---
+
+## Education
+
+### Ph.D. in Public and Nonporfit Management (Public Affairs)
+
+The University of Texas at Dallas, USA (Aug. 2022- )
+
+### Master of Public Administration
+
+Yonsei University, Seoul, South Korea (Sep.2016-Aug.2019)
+
+Thesis Title:
+
+### Bachelor of Public Administration & English languages and literature (double major)
+
+University of Seoul, Seoul, South Korea (Mar.2009-Aug.2016)
+
+## Teaching Assistants
+
+-   EPPS 7316. Regression and Multivariate Analysis (Instructor: Dr. Patrick Brandt, Spring, 2024)
+
+## **Awards, Scholarships and Honors**
