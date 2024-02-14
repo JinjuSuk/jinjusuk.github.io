@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -151,7 +185,20 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#use-the-teds2016-dataset-to-run-a-multiple-regression-model" id="toc-use-the-teds2016-dataset-to-run-a-multiple-regression-model" class="nav-link active" data-scroll-target="#use-the-teds2016-dataset-to-run-a-multiple-regression-model">3.Use the TEDS2016 dataset to run a multiple regression model</a></li>
+  <li><a href="#write-a-function-called-regplot-to-plot-a-regression-line" id="toc-write-a-function-called-regplot-to-plot-a-regression-line" class="nav-link" data-scroll-target="#write-a-function-called-regplot-to-plot-a-regression-line">4,Write a function called regplot to plot a regression line</a></li>
+  <li><a href="#run-a-regplot-on-the-dependent-variable-using-a.-age-b.-education-c.-income" id="toc-run-a-regplot-on-the-dependent-variable-using-a.-age-b.-education-c.-income" class="nav-link" data-scroll-target="#run-a-regplot-on-the-dependent-variable-using-a.-age-b.-education-c.-income">5.<strong>Run a regplot on the dependent variable using: a. Age b. Education c.&nbsp;Income</strong></a></li>
+  <li><a href="#a.-age" id="toc-a.-age" class="nav-link" data-scroll-target="#a.-age">5-a. Age</a></li>
+  <li><a href="#b.-education" id="toc-b.-education" class="nav-link" data-scroll-target="#b.-education">5-b. Education</a></li>
+  <li><a href="#c.-income" id="toc-c.-income" class="nav-link" data-scroll-target="#c.-income">5-c.&nbsp;Income</a></li>
+  <li><a href="#what-is-the-problem-why" id="toc-what-is-the-problem-why" class="nav-link" data-scroll-target="#what-is-the-problem-why">6. What is the problem? Why?</a></li>
+  <li><a href="#what-can-be-done-to-improve-prediction-of-the-dependent-variable" id="toc-what-can-be-done-to-improve-prediction-of-the-dependent-variable" class="nav-link" data-scroll-target="#what-can-be-done-to-improve-prediction-of-the-dependent-variable">7. What can be done to improve prediction of the dependent variable?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,8 +222,315 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="use-the-teds2016-dataset-to-run-a-multiple-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-teds2016-dataset-to-run-a-multiple-regression-model">3.Use the TEDS2016 dataset to run a multiple regression model</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'haven' was built under R version 4.3.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the TEDS2016 dataset</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>TEDS_2016 <span class="ot">&lt;-</span> <span class="fu">read_stata</span>(<span class="st">"https://github.com/datageneration/home/blob/master/DataProgramming/data/TEDS_2016.dta?raw=true"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(TEDS_2016)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    District         Sex             Age           Edu            Arear      
+ Min.   : 201   Min.   :1.000   Min.   :1.0   Min.   :1.000   Min.   :1.000  
+ 1st Qu.:1401   1st Qu.:1.000   1st Qu.:2.0   1st Qu.:2.000   1st Qu.:1.000  
+ Median :6406   Median :1.000   Median :3.0   Median :3.000   Median :3.000  
+ Mean   :4661   Mean   :1.486   Mean   :3.3   Mean   :3.334   Mean   :2.744  
+ 3rd Qu.:6604   3rd Qu.:2.000   3rd Qu.:5.0   3rd Qu.:5.000   3rd Qu.:4.000  
+ Max.   :6806   Max.   :2.000   Max.   :5.0   Max.   :9.000   Max.   :6.000  
+                                                                             
+     Career         Career8          Ethnic          Party      
+ Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   : 1.00  
+ 1st Qu.:1.000   1st Qu.:2.000   1st Qu.:1.000   1st Qu.: 5.00  
+ Median :2.000   Median :4.000   Median :1.000   Median : 7.00  
+ Mean   :2.683   Mean   :3.811   Mean   :1.658   Mean   :13.02  
+ 3rd Qu.:4.000   3rd Qu.:5.000   3rd Qu.:2.000   3rd Qu.:25.00  
+ Max.   :5.000   Max.   :8.000   Max.   :9.000   Max.   :26.00  
+                                                                
+    PartyID          Tondu           Tondu3           nI2       
+ Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   : 1.00  
+ 1st Qu.:2.000   1st Qu.:3.000   1st Qu.:2.000   1st Qu.: 1.00  
+ Median :2.000   Median :4.000   Median :2.000   Median : 3.00  
+ Mean   :4.522   Mean   :4.127   Mean   :2.667   Mean   :35.13  
+ 3rd Qu.:9.000   3rd Qu.:5.000   3rd Qu.:3.000   3rd Qu.:98.00  
+ Max.   :9.000   Max.   :9.000   Max.   :9.000   Max.   :98.00  
+                                                                
+    votetsai          green         votetsai_nm      votetsai_all   
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :1.0000   Median :0.0000   Median :1.0000   Median :1.0000  
+ Mean   :0.6265   Mean   :0.3781   Mean   :0.6265   Mean   :0.5478  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+ NA's   :429                       NA's   :429      NA's   :248     
+  Independence     Unification           sq           Taiwanese     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000   Median :1.0000   Median :1.0000  
+ Mean   :0.2888   Mean   :0.1225   Mean   :0.5172   Mean   :0.6272  
+ 3rd Qu.:1.0000   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+                                                                    
+      edu            female        whitecollar       lowincome    
+ Min.   :1.000   Min.   :0.0000   Min.   :0.0000   Min.   :1.000  
+ 1st Qu.:2.000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:4.000  
+ Median :3.000   Median :0.0000   Median :1.0000   Median :5.000  
+ Mean   :3.301   Mean   :0.4864   Mean   :0.5373   Mean   :4.343  
+ 3rd Qu.:5.000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:5.000  
+ Max.   :5.000   Max.   :1.0000   Max.   :1.0000   Max.   :5.000  
+ NA's   :10                                                       
+     income         income_nm           age              KMT        
+ Min.   : 1.000   Min.   : 1.000   Min.   : 20.00   Min.   :0.0000  
+ 1st Qu.: 3.000   1st Qu.: 2.000   1st Qu.: 35.00   1st Qu.:0.0000  
+ Median : 5.500   Median : 5.000   Median : 49.00   Median :0.0000  
+ Mean   : 5.324   Mean   : 5.281   Mean   : 49.11   Mean   :0.2296  
+ 3rd Qu.: 7.000   3rd Qu.: 8.000   3rd Qu.: 61.00   3rd Qu.:0.0000  
+ Max.   :10.000   Max.   :10.000   Max.   :100.00   Max.   :1.0000  
+                  NA's   :330                                       
+      DPP              npp             noparty            pfp         
+ Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :0.00000  
+ 1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000  
+ Median :0.0000   Median :0.00000   Median :0.0000   Median :0.00000  
+ Mean   :0.3497   Mean   :0.02544   Mean   :0.3716   Mean   :0.01893  
+ 3rd Qu.:1.0000   3rd Qu.:0.00000   3rd Qu.:1.0000   3rd Qu.:0.00000  
+ Max.   :1.0000   Max.   :1.00000   Max.   :1.0000   Max.   :1.00000  
+                                                                      
+     South            north        Minnan_father    Mainland_father 
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000   Median :1.0000   Median :0.0000  
+ Mean   :0.4947   Mean   :0.4799   Mean   :0.7225   Mean   :0.1024  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+                                                                    
+   Econ_worse       Inequality      inequality5      econworse5   
+ Min.   :0.0000   Min.   :0.0000   Min.   :1.000   Min.   :1.000  
+ 1st Qu.:0.0000   1st Qu.:1.0000   1st Qu.:4.000   1st Qu.:3.000  
+ Median :1.0000   Median :1.0000   Median :5.000   Median :4.000  
+ Mean   :0.5544   Mean   :0.9355   Mean   :4.495   Mean   :3.644  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:5.000   3rd Qu.:4.000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :5.000   Max.   :5.000  
+                                                                  
+ Govt_for_public     pubwelf5     Govt_dont_care     highincome    
+ Min.   :0.0000   Min.   :1.000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:2.000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :3.000   Median :0.0000   Median :1.0000  
+ Mean   :0.4249   Mean   :2.877   Mean   :0.4988   Mean   :0.5765  
+ 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :5.000   Max.   :1.0000   Max.   :1.0000  
+                                                   NA's   :330     
+    votekmt         votekmt_nm          Blue       Green      No_Party
+ Min.   :0.0000   Min.   :0.0000   Min.   :0   Min.   :0   Min.   :0  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0   1st Qu.:0   1st Qu.:0  
+ Median :0.0000   Median :0.0000   Median :0   Median :0   Median :0  
+ Mean   :0.2053   Mean   :0.2752   Mean   :0   Mean   :0   Mean   :0  
+ 3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:0   3rd Qu.:0   3rd Qu.:0  
+ Max.   :1.0000   Max.   :1.0000   Max.   :0   Max.   :0   Max.   :0  
+                  NA's   :429                                         
+    voteblue       voteblue_nm       votedpp_1        votekmt_1     
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000   Median :1.0000   Median :0.0000  
+ Mean   :0.2787   Mean   :0.3735   Mean   :0.5256   Mean   :0.2309  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+                  NA's   :429      NA's   :187      NA's   :187     </code></pre>
+</div>
+</div>
+</section>
+<section id="write-a-function-called-regplot-to-plot-a-regression-line" class="level3">
+<h3 class="anchored" data-anchor-id="write-a-function-called-regplot-to-plot-a-regression-line">4,Write a function called regplot to plot a regression line</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating a function: regplot </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Combine the lm, plot and abline functions to create a regression fit plot function </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>regplot<span class="ot">=</span><span class="cf">function</span>(x,y){</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  fit<span class="ot">=</span><span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x,y)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(fit,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-a-regplot-on-the-dependent-variable-using-a.-age-b.-education-c.-income" class="level3">
+<h3 class="anchored" data-anchor-id="run-a-regplot-on-the-dependent-variable-using-a.-age-b.-education-c.-income">5.<strong>Run a regplot on the dependent variable using: a. Age b. Education c.&nbsp;Income</strong></h3>
+</section>
+<section id="a.-age" class="level3">
+<h3 class="anchored" data-anchor-id="a.-age">5-a. Age</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(TEDS_2016<span class="sc">$</span>Age<span class="sc">~</span>TEDS_2016<span class="sc">$</span>votetsai))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = TEDS_2016$Age ~ TEDS_2016$votetsai)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.4671 -1.2848  0.5329  1.5329  1.7152 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         3.46709    0.06555  52.890   &lt;2e-16 ***
+TEDS_2016$votetsai -0.18228    0.08282  -2.201   0.0279 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.423 on 1259 degrees of freedom
+  (429 observations deleted due to missingness)
+Multiple R-squared:  0.003833,  Adjusted R-squared:  0.003042 
+F-statistic: 4.844 on 1 and 1259 DF,  p-value: 0.02792</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Allow extra room for additional arguments/specifications</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>regplot<span class="ot">=</span><span class="cf">function</span>(x,y,...){</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  fit<span class="ot">=</span><span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x,y,...)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(fit,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>}  <span class="co"># "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">regplot</span>(TEDS_2016<span class="sc">$</span>Age,TEDS_2016<span class="sc">$</span>votetsai, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Age"</span>,<span class="at">ylab=</span><span class="st">"Votes for Tsai Ing-wen"</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignments3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="b.-education" class="level3">
+<h3 class="anchored" data-anchor-id="b.-education">5-b. Education</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(TEDS_2016<span class="sc">$</span>Edu<span class="sc">~</span>TEDS_2016<span class="sc">$</span>votetsai))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = TEDS_2016$Edu ~ TEDS_2016$votetsai)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.4692 -1.2608 -0.2608  1.5308  5.7392 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         3.46921    0.07053  49.190   &lt;2e-16 ***
+TEDS_2016$votetsai -0.20845    0.08910  -2.339   0.0195 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.531 on 1259 degrees of freedom
+  (429 observations deleted due to missingness)
+Multiple R-squared:  0.004328,  Adjusted R-squared:  0.003537 
+F-statistic: 5.473 on 1 and 1259 DF,  p-value: 0.01947</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Allow extra room for additional arguments/specifications</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>regplot<span class="ot">=</span><span class="cf">function</span>(x,y,...){</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  fit<span class="ot">=</span><span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x,y,...)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(fit,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>}  <span class="co"># "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">regplot</span>(TEDS_2016<span class="sc">$</span>Edu,TEDS_2016<span class="sc">$</span>votetsai, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Age"</span>,<span class="at">ylab=</span><span class="st">"Votes for Tsai Ing-wen"</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignments3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="c.-income" class="level3">
+<h3 class="anchored" data-anchor-id="c.-income">5-c.&nbsp;Income</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(TEDS_2016<span class="sc">$</span>income<span class="sc">~</span>TEDS_2016<span class="sc">$</span>votetsai))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = TEDS_2016$income ~ TEDS_2016$votetsai)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.5329 -2.2304  0.2696  2.4671  4.7696 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)          5.5329     0.1291  42.845   &lt;2e-16 ***
+TEDS_2016$votetsai  -0.3025     0.1632  -1.854   0.0639 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.803 on 1259 degrees of freedom
+  (429 observations deleted due to missingness)
+Multiple R-squared:  0.002724,  Adjusted R-squared:  0.001931 
+F-statistic: 3.438 on 1 and 1259 DF,  p-value: 0.06393</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Allow extra room for additional arguments/specifications</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>regplot<span class="ot">=</span><span class="cf">function</span>(x,y,...){</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  fit<span class="ot">=</span><span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x,y,...)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(fit,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}  <span class="co"># "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">regplot</span>(TEDS_2016<span class="sc">$</span>income,TEDS_2016<span class="sc">$</span>votetsai, </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Age"</span>,<span class="at">ylab=</span><span class="st">"Votes for Tsai Ing-wen"</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignments3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-is-the-problem-why" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-the-problem-why">6. What is the problem? Why?</h3>
+<ul>
+<li><p>When th dependent variable is a categorical variable in a linear regression model, categorical variables are unable to indicate a linear relationship with independent variables.</p></li>
+<li><p>Basically, linear regression assumes that the dependent variable is continuous and distributed normally. Categorical variables as the dependent variable result in discrete outcomes.</p></li>
+<li><p>To addresss this issue, logistic regression for binary outcomes can be used with categorical dependent variables.</p></li>
+</ul>
+</section>
+<section id="what-can-be-done-to-improve-prediction-of-the-dependent-variable" class="level3">
+<h3 class="anchored" data-anchor-id="what-can-be-done-to-improve-prediction-of-the-dependent-variable">7. What can be done to improve prediction of the dependent variable?</h3>
+<ul>
+<li><p>The independent variables should be carefully selected and have a strong relationship with the independent variable.</p></li>
+<li><p>Performance should be generalized by using complicated model and preventing overfitting.</p></li>
+<li><p>Multiple models can be combined to improve the strengths of each model and prediciton accuracy.</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
