@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Jinju Suk - About Me</title>
+<title>Jinju Suk</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -155,44 +155,138 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#jinju-suk" id="toc-jinju-suk" class="nav-link active" data-scroll-target="#jinju-suk">Jinju Suk</a></li>
+  <li><a href="#knowledge-mining-linear-regression" id="toc-knowledge-mining-linear-regression" class="nav-link active" data-scroll-target="#knowledge-mining-linear-regression">Knowledge Mining: Linear regression</a></li>
+  <li><a href="#file-lab_linearregression01.r" id="toc-file-lab_linearregression01.r" class="nav-link" data-scroll-target="#file-lab_linearregression01.r">File: Lab_linearregression01.R</a></li>
+  <li><a href="#theme-linear-regression" id="toc-theme-linear-regression" class="nav-link" data-scroll-target="#theme-linear-regression">Theme: Linear regression</a></li>
+  <li><a href="#data-mass-islr" id="toc-data-mass-islr" class="nav-link" data-scroll-target="#data-mass-islr">Data: MASS, ISLR</a></li>
+  <li><a href="#adapted-from-islr-chapter-3-lab" id="toc-adapted-from-islr-chapter-3-lab" class="nav-link" data-scroll-target="#adapted-from-islr-chapter-3-lab">Adapted from ISLR Chapter 3 Lab</a>
+  <ul class="collapse">
+  <li><a href="#load-datasets-from-mass-and-islr-packages" id="toc-load-datasets-from-mass-and-islr-packages" class="nav-link" data-scroll-target="#load-datasets-from-mass-and-islr-packages">Load datasets from MASS and ISLR packages</a>
+  <ul class="collapse">
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#predictions-using-values-in-lstat" id="toc-predictions-using-values-in-lstat" class="nav-link" data-scroll-target="#predictions-using-values-in-lstat">Predictions using values in lstat</a></li>
+  <li><a href="#prediction-interval-uses-sample-mean-and-takes-into-account-the-variability-of-the-estimators-for-μ-and-σ." id="toc-prediction-interval-uses-sample-mean-and-takes-into-account-the-variability-of-the-estimators-for-μ-and-σ." class="nav-link" data-scroll-target="#prediction-interval-uses-sample-mean-and-takes-into-account-the-variability-of-the-estimators-for-μ-and-σ.">Prediction interval uses sample mean and takes into account the variability of the estimators for μ and σ.</a></li>
+  <li><a href="#therefore-the-interval-will-be-wider." id="toc-therefore-the-interval-will-be-wider." class="nav-link" data-scroll-target="#therefore-the-interval-will-be-wider.">Therefore, the interval will be wider.</a>
+  <ul class="collapse">
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple linear regression</a></li>
+  </ul></li>
+  <li><a href="#update-function-to-re-specify-the-model-i.e.-include-all-but-age-and-indus-variables" id="toc-update-function-to-re-specify-the-model-i.e.-include-all-but-age-and-indus-variables" class="nav-link" data-scroll-target="#update-function-to-re-specify-the-model-i.e.-include-all-but-age-and-indus-variables">Update function to re-specify the model, i.e.&nbsp;include all but age and indus variables</a></li>
+  <li><a href="#set-the-next-plot-configuration" id="toc-set-the-next-plot-configuration" class="nav-link" data-scroll-target="#set-the-next-plot-configuration">Set the next plot configuration</a></li>
+  <li><a href="#uses-coefplot-to-plot-coefficients.-note-the-line-at-0." id="toc-uses-coefplot-to-plot-coefficients.-note-the-line-at-0." class="nav-link" data-scroll-target="#uses-coefplot-to-plot-coefficients.-note-the-line-at-0.">Uses coefplot to plot coefficients. Note the line at 0.</a>
+  <ul class="collapse">
+  <li><a href="#nonlinear-terms-and-interactions" id="toc-nonlinear-terms-and-interactions" class="nav-link" data-scroll-target="#nonlinear-terms-and-interactions">Nonlinear terms and Interactions</a></li>
+  <li><a href="#i-identity-function-for-squared-term-to-interpret-as-is" id="toc-i-identity-function-for-squared-term-to-interpret-as-is" class="nav-link" data-scroll-target="#i-identity-function-for-squared-term-to-interpret-as-is">I() identity function for squared term to interpret as-is</a></li>
+  <li><a href="#combine-two-command-lines-with-semicolon" id="toc-combine-two-command-lines-with-semicolon" class="nav-link" data-scroll-target="#combine-two-command-lines-with-semicolon">Combine two command lines with semicolon</a>
+  <ul class="collapse">
+  <li><a href="#writing-an-r-function-to-combine-the-lm-plot-and-abline-functions-to" id="toc-writing-an-r-function-to-combine-the-lm-plot-and-abline-functions-to" class="nav-link" data-scroll-target="#writing-an-r-function-to-combine-the-lm-plot-and-abline-functions-to">Writing an R function to combine the lm, plot and abline functions to</a></li>
+  <li><a href="#create-a-one-step-regression-fit-plot-function" id="toc-create-a-one-step-regression-fit-plot-function" class="nav-link" data-scroll-target="#create-a-one-step-regression-fit-plot-function">create a one step regression fit plot function</a></li>
+  </ul></li>
+  <li><a href="#additional-note-try-out-the-coefplot2-package-to-finetune-the-coefplots" id="toc-additional-note-try-out-the-coefplot2-package-to-finetune-the-coefplots" class="nav-link" data-scroll-target="#additional-note-try-out-the-coefplot2-package-to-finetune-the-coefplots">Additional note: try out the coefplot2 package to finetune the coefplots</a></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#try-other-combination-of-interactive-terms" id="toc-try-other-combination-of-interactive-terms" class="nav-link" data-scroll-target="#try-other-combination-of-interactive-terms">Try other combination of interactive terms</a></li>
+  <li><a href="#how-to-interpret-interactive-terms" id="toc-how-to-interpret-interactive-terms" class="nav-link" data-scroll-target="#how-to-interpret-interactive-terms">How to interpret interactive terms?</a></li>
+  <li><a href="#read-brambor-t.-clark-w.r.-and-golder-m.-2006.-understanding-interaction-models-improving-empirical-analyses.-political-analysis-141-pp.63-82." id="toc-read-brambor-t.-clark-w.r.-and-golder-m.-2006.-understanding-interaction-models-improving-empirical-analyses.-political-analysis-141-pp.63-82." class="nav-link" data-scroll-target="#read-brambor-t.-clark-w.r.-and-golder-m.-2006.-understanding-interaction-models-improving-empirical-analyses.-political-analysis-141-pp.63-82.">Read: Brambor, T., Clark, W.R. and Golder, M., 2006. Understanding interaction models: Improving empirical analyses. Political analysis, 14(1), pp.63-82.</a></li>
+  <li><a href="#what-are-qualitative-variables-what-class-should-they-be" id="toc-what-are-qualitative-variables-what-class-should-they-be" class="nav-link" data-scroll-target="#what-are-qualitative-variables-what-class-should-they-be">What are qualitative variables? What class should they be?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About Me</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="jinju-suk" class="level2">
-<h2 class="anchored" data-anchor-id="jinju-suk">Jinju Suk</h2>
-<p>- Ph.D.&nbsp;candidate in Public and Nonprofit Management (PNM) at the University of Texas at Dallas</p>
-<p>Email: Jinju.Suk@utdallas.edu</p>
-<p>Linkedin: <a href="https://www.linkedin.com/in/jinju-suk-82763125a/">Jinju Suk Linkedin</a></p>
-<p>Research Interests</p>
-<ul>
-<li><p>Organizational Behavior</p></li>
-<li><p>Job Satisfaction</p></li>
-<li><p>Public Management</p></li>
-<li><p>Human Resource Management</p></li>
-</ul>
+<section id="knowledge-mining-linear-regression" class="level1">
+<h1>Knowledge Mining: Linear regression</h1>
+</section>
+<section id="file-lab_linearregression01.r" class="level1">
+<h1>File: Lab_linearregression01.R</h1>
+</section>
+<section id="theme-linear-regression" class="level1">
+<h1>Theme: Linear regression</h1>
+</section>
+<section id="data-mass-islr" class="level1">
+<h1>Data: MASS, ISLR</h1>
+</section>
+<section id="adapted-from-islr-chapter-3-lab" class="level1">
+<h1>Adapted from ISLR Chapter 3 Lab</h1>
+<p>install.packages(c(“easypackages”,“MASS”,“ISLR”,“arm”)) library(easypackages) libraries(“arm”,“MASS”,“ISLR”)</p>
+<section id="load-datasets-from-mass-and-islr-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-datasets-from-mass-and-islr-packages">Load datasets from MASS and ISLR packages</h2>
+<p>attach(Boston)</p>
+<section id="simple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="simple-linear-regression">Simple linear regression</h3>
+<p>names(Boston) # What is the Boston dataset? ?Boston plot(medv~lstat,Boston, pch=20, cex=.8, col=“steelblue”) fit1=lm(medv~lstat,data=Boston) fit1 summary(fit1) abline(fit1,col=“firebrick”) names(fit1) confint(fit1) # confidence intervals</p>
+</section>
+</section>
+</section>
+<section id="predictions-using-values-in-lstat" class="level1">
+<h1>Predictions using values in lstat</h1>
+<p>predict(fit1,data.frame(lstat=c(0,5,10,15)),interval=“confidence”) # confidence intervals predict(fit1,data.frame(lstat=c(0,5,10,15)),interval=“prediction”) # prediction intervals</p>
+</section>
+<section id="prediction-interval-uses-sample-mean-and-takes-into-account-the-variability-of-the-estimators-for-μ-and-σ." class="level1">
+<h1>Prediction interval uses sample mean and takes into account the variability of the estimators for μ and σ.</h1>
+</section>
+<section id="therefore-the-interval-will-be-wider." class="level1">
+<h1>Therefore, the interval will be wider.</h1>
+<section id="multiple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h3>
+<p>fit2=lm(medv~lstat+age,data=Boston) summary(fit2) fit3=lm(medv~.,Boston) summary(fit3) par(mfrow=c(2,2)) plot(fit3,pch=20, cex=.8, col=“steelblue”) mtext(“fit3”, side = 3, line = - 2, cex = 2, outer = TRUE)</p>
+</section>
+</section>
+<section id="update-function-to-re-specify-the-model-i.e.-include-all-but-age-and-indus-variables" class="level1">
+<h1>Update function to re-specify the model, i.e.&nbsp;include all but age and indus variables</h1>
+<p>fit4=update(fit3,~.-age-indus) summary(fit4)</p>
+</section>
+<section id="set-the-next-plot-configuration" class="level1">
+<h1>Set the next plot configuration</h1>
+<p>par(mfrow=c(2,2), main=“fit4”) plot(fit4,pch=20, cex=.8, col=“steelblue”) mtext(“fit4”, side = 3, line = - 2, cex = 2, outer = TRUE)</p>
+</section>
+<section id="uses-coefplot-to-plot-coefficients.-note-the-line-at-0." class="level1">
+<h1>Uses coefplot to plot coefficients. Note the line at 0.</h1>
+<p>par(mfrow=c(1,1)) arm::coefplot(fit4)</p>
+<section id="nonlinear-terms-and-interactions" class="level3">
+<h3 class="anchored" data-anchor-id="nonlinear-terms-and-interactions">Nonlinear terms and Interactions</h3>
+<p>fit5=lm(medv~lstat*age,Boston) # include both variables and the interaction term x1:x2 summary(fit5)</p>
+</section>
+<section id="i-identity-function-for-squared-term-to-interpret-as-is" class="level2">
+<h2 class="anchored" data-anchor-id="i-identity-function-for-squared-term-to-interpret-as-is">I() identity function for squared term to interpret as-is</h2>
+</section>
+<section id="combine-two-command-lines-with-semicolon" class="level2">
+<h2 class="anchored" data-anchor-id="combine-two-command-lines-with-semicolon">Combine two command lines with semicolon</h2>
+<p>fit6=lm(medv~lstat +I(lstat^2),Boston); summary(fit6) par(mfrow=c(1,1)) plot(medv~lstat, pch=20, col=“forestgreen”)</p>
+<p>points(lstat,fitted(fit6),col=“firebrick”,pch=20) fit7=lm(medv~poly(lstat,4)) points(lstat,fitted(fit7),col=“steelblue”,pch=20)</p>
+<p>###Qualitative predictors names(Carseats) summary(Carseats) fit1=lm(Sales~.+Income:Advertising+Age:Price,Carseats) # add two interaction terms summary(fit1) attach(Carseats) contrasts(Carseats$ShelveLoc) # what is contrasts function? ?contrasts</p>
+<section id="writing-an-r-function-to-combine-the-lm-plot-and-abline-functions-to" class="level3">
+<h3 class="anchored" data-anchor-id="writing-an-r-function-to-combine-the-lm-plot-and-abline-functions-to">Writing an R function to combine the lm, plot and abline functions to</h3>
+</section>
+<section id="create-a-one-step-regression-fit-plot-function" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-one-step-regression-fit-plot-function">create a one step regression fit plot function</h3>
+<p>regplot=function(x,y){ fit=lm(y~x) plot(x,y, pch=20) abline(fit,col=“firebrick”) } attach(Carseats) regplot(Price,Sales) ## Allow extra room for additional arguments/specifications regplot=function(x,y,…){ fit=lm(y~x) plot(x,y,…) abline(fit,col=“firebrick”) } regplot(Price,Sales,xlab=“Price”,ylab=“Sales”,col=“steelblue”,pch=20)</p>
+</section>
+</section>
+<section id="additional-note-try-out-the-coefplot2-package-to-finetune-the-coefplots" class="level2">
+<h2 class="anchored" data-anchor-id="additional-note-try-out-the-coefplot2-package-to-finetune-the-coefplots">Additional note: try out the coefplot2 package to finetune the coefplots</h2>
+<p>##install.packages(“coefplot2”, repos=“http://www.math.mcmaster.ca/bolker/R”, type=“source”) ## library(coefplot2)</p>
+</section>
+</section>
+<section id="exercise" class="level1">
+<h1>Exercise</h1>
+</section>
+<section id="try-other-combination-of-interactive-terms" class="level1">
+<h1>Try other combination of interactive terms</h1>
+</section>
+<section id="how-to-interpret-interactive-terms" class="level1">
+<h1>How to interpret interactive terms?</h1>
+</section>
+<section id="read-brambor-t.-clark-w.r.-and-golder-m.-2006.-understanding-interaction-models-improving-empirical-analyses.-political-analysis-141-pp.63-82." class="level1">
+<h1>Read: Brambor, T., Clark, W.R. and Golder, M., 2006. Understanding interaction models: Improving empirical analyses. Political analysis, 14(1), pp.63-82.</h1>
+</section>
+<section id="what-are-qualitative-variables-what-class-should-they-be" class="level1">
+<h1>What are qualitative variables? What class should they be?</h1>
 
 
 </section>
