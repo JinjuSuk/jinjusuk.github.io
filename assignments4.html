@@ -194,6 +194,10 @@ window.Quarto = {
  <span class="dropdown-text">Assignment 4</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="./assignments5.html">
+ <span class="dropdown-text">Assignment 5</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./Lab01.html">
  <span class="dropdown-text">Lab 01</span></a>
   </li>  
@@ -237,6 +241,7 @@ window.Quarto = {
   </ul></li>
   </ul></li>
   <li><a href="#hands-on-workshop-principal-component-analysis-and-clustering-methods" id="toc-hands-on-workshop-principal-component-analysis-and-clustering-methods" class="nav-link" data-scroll-target="#hands-on-workshop-principal-component-analysis-and-clustering-methods">Hands-on workshop: Principal Component Analysis and Clustering methods</a></li>
+  <li><a href="#generate-dendrogram-using-factoextra-package" id="toc-generate-dendrogram-using-factoextra-package" class="nav-link" data-scroll-target="#generate-dendrogram-using-factoextra-package">Generate dendrogram using factoextra package</a></li>
   </ul>
 </nav>
     </div>
@@ -615,21 +620,11 @@ Available components:
 </div>
 </div>
 <p><strong>3. Hierarchical Clustering</strong></p>
-<pre class="{## Hierarchical Clustering}"><code>## Dataset: USArrests
-#  install.packages("cluster")
-arrest.hc &lt;- USArrests %&gt;%
-  scale() %&gt;%                    # Scale all variables
-  dist(method = "euclidean") %&gt;% # Euclidean distance for dissimilarity 
-  hclust(method = "ward.D2")     # Compute hierarchical clustering
-
-# Generate dendrogram using factoextra package
-fviz_dend(arrest.hc, k = 4, # Four groups
-          cex = 0.5, 
-          k_colors = c("firebrick1","forestgreen","blue", "purple"),
-          color_labels_by_k = TRUE, # color labels by groups
-          rect = TRUE, # Add rectangle (cluster) around groups,
-          main = "Cluster Dendrogram: USA Arrest data"
-) + theme(text = element_text(family="Georgia")) </code></pre>
+<p>```{## Hierarchical Clustering} ## Dataset: USArrests # install.packages(“cluster”) arrest.hc &lt;- USArrests %&gt;% scale() %&gt;% # Scale all variables dist(method = “euclidean”) %&gt;% # Euclidean distance for dissimilarity hclust(method = “ward.D2”) # Compute hierarchical clustering</p>
+</section>
+<section id="generate-dendrogram-using-factoextra-package" class="level1">
+<h1>Generate dendrogram using factoextra package</h1>
+<p>fviz_dend(arrest.hc, k = 4, # Four groups cex = 0.5, k_colors = c(“firebrick1”,“forestgreen”,“blue”, “purple”), color_labels_by_k = TRUE, # color labels by groups rect = TRUE, # Add rectangle (cluster) around groups, main = “Cluster Dendrogram: USA Arrest data” ) + theme(text = element_text(family=“Georgia”)) ```</p>
 <p><strong>References</strong></p>
 <p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013 <em>An introduction to statistical learning</em>. Vol. 112. New York: Springer.</p>
 
