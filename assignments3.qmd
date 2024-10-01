@@ -1,0 +1,101 @@
+---
+title: "Assignment3"
+---
+
+### 3.Use the TEDS2016 dataset to run a multiple regression model
+
+```{r}
+# Load necessary packages
+library(haven)
+library(dplyr)
+```
+
+```{r}
+library(ggplot2)
+
+# Read the TEDS2016 dataset
+TEDS_2016 <- read_stata("https://github.com/datageneration/home/blob/master/DataProgramming/data/TEDS_2016.dta?raw=true")
+
+summary(TEDS_2016)
+```
+
+### 4,Write a function called regplot to plot a regression line
+
+```{r}
+## Creating a function: regplot 
+## Combine the lm, plot and abline functions to create a regression fit plot function 
+regplot=function(x,y){
+  fit=lm(y~x)
+  plot(x,y)
+  abline(fit,col="red")
+}
+```
+
+### 5.**Run a regplot on the dependent variable using: a. Age b. Education c. Income**
+
+### 5-a. Age
+
+```{r}
+summary(lm(TEDS_2016$Age~TEDS_2016$votetsai))
+```
+
+```{r}
+## Allow extra room for additional arguments/specifications
+regplot=function(x,y,...){
+  fit=lm(y~x)
+  plot(x,y,...)
+  abline(fit,col="red")
+}  # "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.
+regplot(TEDS_2016$Age,TEDS_2016$votetsai, 
+        xlab="Age",ylab="Votes for Tsai Ing-wen",col="blue",pch=20)
+```
+
+### 5-b. Education
+
+```{r}
+summary(lm(TEDS_2016$Edu~TEDS_2016$votetsai))
+```
+
+```{r}
+## Allow extra room for additional arguments/specifications
+regplot=function(x,y,...){
+  fit=lm(y~x)
+  plot(x,y,...)
+  abline(fit,col="red")
+}  # "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.
+regplot(TEDS_2016$Edu,TEDS_2016$votetsai, 
+        xlab="Age",ylab="Votes for Tsai Ing-wen",col="blue",pch=20)
+```
+
+### 5-c. Income
+
+```{r}
+summary(lm(TEDS_2016$income~TEDS_2016$votetsai))
+```
+
+```{r}
+## Allow extra room for additional arguments/specifications
+regplot=function(x,y,...){
+  fit=lm(y~x)
+  plot(x,y,...)
+  abline(fit,col="red")
+}  # "..." is called ellipsis, which is designed to take any number of named or unnamed arguments.
+regplot(TEDS_2016$income,TEDS_2016$votetsai, 
+        xlab="Age",ylab="Votes for Tsai Ing-wen",col="blue",pch=20)
+```
+
+### 6. What is the problem? Why?
+
+-   When th dependent variable is a categorical variable in a linear regression model, categorical variables are unable to indicate a linear relationship with independent variables.
+
+-   Basically, linear regression assumes that the dependent variable is continuous and distributed normally. Categorical variables as the dependent variable result in discrete outcomes.
+
+-   To addresss this issue, logistic regression for binary outcomes can be used with categorical dependent variables.
+
+### 7. What can be done to improve prediction of the dependent variable?
+
+-   The independent variables should be carefully selected and have a strong relationship with the independent variable.
+
+-   Performance should be generalized by using complicated model and preventing overfitting.
+
+-   Multiple models, such as Ensemble methods, can be combined to improve the strengths of each model and prediciton accuracy.

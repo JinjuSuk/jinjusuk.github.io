@@ -1,7 +1,15 @@
 ---
-title: "assignments7"
+title: "assignments6"
 author: "Jinju Suk"
 ---
+
+```{# Knowledge Mining: Logistic Regression}
+# File: Lab_logisticregression01.R
+# Theme: Logistic regression
+# Adapted from ISLR Chapter 4 Lab
+
+```
+
 ```{r}
 # Load ISLR library
 
@@ -11,17 +19,16 @@ require(ISLR)
 ?Smarket
 names(Smarket)
 summary(Smarket)
-```
-```{r}
 
 # Create a dataframe for data browsing
 sm=Smarket
+```
 
+\
+
+```{r}
 # Bivariate Plot of inter-lag correlations
 pairs(Smarket,col=Smarket$Direction,cex=.5, pch=20)
-```
-```{r}
-
 
 # Logistic regression
 glm.fit=glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,
@@ -33,9 +40,6 @@ glm.pred=ifelse(glm.probs>0.5,"Up","Down")
 attach(Smarket)
 table(glm.pred,Direction)
 mean(glm.pred==Direction)
-```
-```{r}
-
 
 # Make training and test set for prediction
 train = Year<2005
@@ -46,9 +50,6 @@ glm.pred=ifelse(glm.probs >0.5,"Up","Down")
 Direction.2005=Smarket$Direction[!train]
 table(glm.pred,Direction.2005)
 mean(glm.pred==Direction.2005)
-```
-
-```{r}
 #Fit smaller model
 glm.fit=glm(Direction~Lag1+Lag2,
             data=Smarket,family=binomial, subset=train)
@@ -56,13 +57,11 @@ glm.probs=predict(glm.fit,newdata=Smarket[!train,],type="response")
 glm.pred=ifelse(glm.probs >0.5,"Up","Down")
 table(glm.pred,Direction.2005)
 mean(glm.pred==Direction.2005)
-```
-```{r}
-
 
 # Check accuracy rate
 106/(76+106)
 
 # Can you interpret the results?
-```
 
+
+```

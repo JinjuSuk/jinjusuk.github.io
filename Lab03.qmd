@@ -1,11 +1,15 @@
 ---
 title: "EPPS 6323: Lab02 R programming (Exploratory Data Analysis)" 
 author: "Jinju Suk" 
-format: html 
-editor: visual ---
+format: html
+editor: visual
 ---
 
 # R Programming (EDA)
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 ```{r}
 ## Creating a function: regplot

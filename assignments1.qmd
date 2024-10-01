@@ -1,0 +1,28 @@
+---
+title: "Assignment01"
+format: html
+---
+
+## Assignment 01
+
+### Team Project -Brainstorm
+
+### **01 Starting with data or research question?**
+
+-   What factors affect job satisfaction in the public sector?
+
+### **02 Do you have a hypothesis?**
+
+-   Hypotheses will be illustrated by considering factors that are influential for public employees' satisfaction in the workplace
+
+### **03 How data can be collected and stored?**
+
+-   Data will be collected by considering one single country and long-term period.
+
+### **04 What methods could be considered?**
+
+-   This study aims to explore which factors are more important by using Machine Learning.
+
+### **05 Collaboration and team work**
+
+-   Our team comprises Dohyo Jeong (Coordinator), Jinju Suk, and Oswald Chau.

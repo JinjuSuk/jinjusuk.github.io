@@ -1,0 +1,118 @@
+---
+title: "Assignment02"
+format: html
+editor: visual
+---
+
+## Assignment 02
+
+1.  Lab01 and Lap02
+
+2.  Review Chapters 3
+
+```{r, warning=FALSE}
+library(haven) 
+library(dplyr) 
+TEDS_2016 <- read_stata("https://github.com/datageneration/home/blob/master/DataProgramming/data/TEDS_2016.dta?raw=true")
+
+summary(TEDS_2016)
+```
+
+```{r}
+#install.packages("descr")
+TEDS_2016 <- read_stata("https://github.com/datageneration/home/blob/master/DataProgramming/data/TEDS_2016.dta?raw=true")
+```
+
+3.  what problems do you encounter when working with the dataset?
+    -   To figure out missing values may be difficult
+
+    -   Statistical analysis can be difficult because of outliers
+
+    -   Unexpected values can indicate errors when collecting data
+4.  How to deal with missing values?
+    -   To remove missing values by using mean, median, and so on
+
+    -   Multiple imputation methodologies may be helpful
+5.  Explore the relationship between Tondu and other variables
+
+```{r}
+# Load necessary packages
+library(ggplot2)
+
+# Filter the data for female = 0 and female = 1
+TEDS_female_0 <- TEDS_2016[TEDS_2016$female == 0, ]
+TEDS_female_1 <- TEDS_2016[TEDS_2016$female == 1, ]
+
+# Create a colorful boxplot
+ggplot(TEDS_2016, aes(x = factor(female), y = Tondu, fill = factor(female))) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("blue", "red")) +
+  labs(x = "Female", y = "Tondu", title = "Boxplot of Tondu by Female") +
+  theme_minimal()
+```
+
+
+```{r}
+# Load necessary packages
+library(ggplot2)
+
+# Create a frequency table for Tondu by Female
+frequency_table <- with(TEDS_2016, table(Tondu, female))
+
+# Convert the frequency table to a data frame
+frequency_df <- as.data.frame(frequency_table)
+
+# Rename the columns for better clarity
+colnames(frequency_df) <- c("Tondu", "Female", "Frequency")
+
+# Create a colorful bar graph
+ggplot(frequency_df, aes(x = Tondu, y = Frequency, fill = factor(Female))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("blue", "red")) +
+  labs(x = "Tondu", y = "Frequency", fill = "Female") +
+  ggtitle("Frequency of Tondu by Female") +
+  theme_minimal()
+```
+
+
+6. How about the 'votetsai' variable?
+```{r}
+# Load necessary packages
+library(ggplot2)
+library(dplyr)
+
+# Create frequency table for votetsai variable
+votetsai_freq <- table(TEDS_2016$votetsai)
+
+# Convert frequency table to data frame
+votetsai_df <- as.data.frame(votetsai_freq)
+colnames(votetsai_df) <- c("Vote", "Frequency")
+
+# Bar plot of votetsai variable
+barplot(votetsai_freq, main = "Votes for Tsai Ing-wen",
+        xlab = "Vote", ylab = "Frequency", col = "skyblue")
+```
+
+
+```{r}
+# Pie chart of votetsai variable
+pie(votetsai_freq, main = "Votes for Tsai Ing-wen", 
+    labels = votetsai_freq, col = rainbow(length(votetsai_freq)))
+```
+
+```{r}
+# Table of votetsai variable
+print(votetsai_df)
+```
+
+```{r}
+# Bar graph of votetsai variable with ggplot2
+ggplot(votetsai_df, aes(x = Vote, y = Frequency, fill = Vote)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Vote", y = "Frequency", fill = "Vote") +
+  ggtitle("Votes for Tsai Ing-wen") +
+  theme_minimal()
+```
+
+
+
